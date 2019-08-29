@@ -137,7 +137,7 @@ for i in range(1, runs + 1):
             if(frequency_array[x] == 440):
                 print("Playing concert pitch A")
             elif(frequency_array[x] == 587.33):
-                print("Playing concert pitch A")
+                print("Playing chord D5")
             else:
                 # standard print of current frequency
                 print("Playing tone at {0:0.2f} Hz".format(frequency_array[x]))
