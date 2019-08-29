@@ -94,9 +94,15 @@ frequency_array.extend([2000])
 frequency_array.extend([2500])
 # white noise
 frequency_array.extend([0])
-def white_noise():
+def white_noise(timeout):
+    # custom stream for white noise
     stream = pyaudio.PyAudio().open(format = pyaudio.paInt8,channels = 1,rate = 22050,output = True)
-    for n in range(0,220000,1): stream.write(chr(int(random.random()*256)))
+    # loop with timer to generate step time duration
+    stop = time.time() + timeout
+    while time.time() < stop:
+        # write stream for white noise
+        stream.write(chr(int(random.random()*256)))
+
 # Kammerton A
 frequency_array.extend([440])
 # D5
@@ -121,11 +127,11 @@ for i in range(1, runs + 1):
 
     for x in range(0, len(frequency_array)):
         # print current loop number
-        print("Loop - " + str(x+1) + " / " +  str(len(frequency_array)))
+        print("Run: " + str(i) + " - Loop: " + str(x+1) + " / " +  str(len(frequency_array)))
         # special case white noise
         if(frequency_array[x] == 0):
             print("Playing white noise")
-            white_noise()
+            white_noise(step_duration)
         else:
             # custom prints for special cases
             if(frequency_array[x] == 440):
