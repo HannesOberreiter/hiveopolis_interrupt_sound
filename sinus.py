@@ -8,6 +8,7 @@ import numpy
 import pyaudio
 import math
 import time
+import random
 
 class ToneGenerator(object):
 
@@ -78,23 +79,41 @@ frequency_array.extend([1500])
 frequency_array.extend([2000])
 frequency_array.extend([2500])
 
+# white noise
+frequency_array.extend([0])
+def white_noise():
+    stream = pyaudio.PyAudio().open(format = pyaudio.paInt8,channels = 1,rate = 22050,output = True)
+    for n in range(0,220000,1): stream.write(chr(int(random.random()*256)))
+
 # Kammerton A
-frequency_array.extend([])
+frequency_array.extend([440])
 # D5
-frequency_array.extend([])
+frequency_array.extend([587.33])
 
 # Amplitude of the waveform
 amplitude = 0.50
 # Time (seconds) to play at each step
 step_duration = 5
 
-for x in range(0, len(frequency_array)):
+random.shuffle(frequency_array)
 
-    print("Playing tone at {0:0.2f} Hz".format(frequency_array[x]))
-    generator.play(frequency_array[x], step_duration, amplitude)
-    while generator.is_playing():
-        # record the sound?
-        pass
+for x in range(0, len(frequency_array)):
+    print("Loop - " + str(x) + " / " +  str(len(frequency_array)))
+    if(frequency_array[x] == 0):
+        print("Playing white noise")
+        white_noise()
+    else:
+        if(frequency_array[x] == 440):
+            print("Playing concert pitch A")
+        elif(frequency_array[x] == 587.33):
+            print("Playing concert pitch A")
+        else:
+            print("Playing tone at {0:0.2f} Hz".format(frequency_array[x]))
+
+        generator.play(frequency_array[x], step_duration, amplitude)
+        while generator.is_playing():
+            # record the sound?
+            pass
 
     print("Sleep 10 seconds")
     time.sleep(10)
