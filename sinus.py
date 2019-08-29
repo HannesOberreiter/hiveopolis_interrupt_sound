@@ -1,4 +1,4 @@
-### pyaudio:
+### pyaudio --- see link for installtion guide
 ### http://people.csail.mit.edu/hubert/pyaudio/
 
 ## ToneGenerator from:
@@ -7,6 +7,7 @@
 import numpy
 import pyaudio
 import math
+import time
 
 class ToneGenerator(object):
 
@@ -66,20 +67,34 @@ generator = ToneGenerator()
 # Frequency to start the sweep from
 frequency_start = 100
 # Frequency to end the sweep at
-frequency_end = 1000
-# Number of frequencies in the sweep
-num_frequencies = 18
+frequency_end = 800
+# steps
+steps = 50
+# generate array
+frequency_array = list(range(frequency_start, frequency_end, steps))
+# push to array special cases
+frequency_array.extend([1000])
+frequency_array.extend([1500])
+frequency_array.extend([2000])
+frequency_array.extend([2500])
+
+# Kammerton A
+frequency_array.extend([])
+# D5
+frequency_array.extend([])
+
 # Amplitude of the waveform
 amplitude = 0.50
 # Time (seconds) to play at each step
 step_duration = 5
 
-for frequency in numpy.logspace(math.log(frequency_start, 10),
-                                math.log(frequency_end, 10),
-                                num_frequencies):
+for x in range(0, len(frequency_array)):
 
-    print("Playing tone at {0:0.2f} Hz".format(frequency))
-    generator.play(frequency, step_duration, amplitude)
+    print("Playing tone at {0:0.2f} Hz".format(frequency_array[x]))
+    generator.play(frequency_array[x], step_duration, amplitude)
     while generator.is_playing():
         # record the sound?
         pass
+
+    print("Sleep 10 seconds")
+    time.sleep(10)
