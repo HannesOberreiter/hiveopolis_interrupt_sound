@@ -4,7 +4,7 @@
 #############################
 
 import numpy
-### pyaudio --- see link for installtion guide
+### pyaudio --- see link for installation guide
 ### http://people.csail.mit.edu/hubert/pyaudio/
 import pyaudio
 import math
@@ -104,10 +104,8 @@ frequency_array.extend([587.33])
 
 # Amplitude of the waveform
 amplitude = 0.50
-
 # Number of runs
 runs = 4
-
 # clear
 clear()
 
