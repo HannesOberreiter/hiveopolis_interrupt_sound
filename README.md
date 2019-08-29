@@ -16,9 +16,9 @@ http://people.csail.mit.edu/hubert/pyaudio/
 `pyhton sinus.py`
 
 ### references and citation ###
-portAudio
+* portAudio
 http://www.portaudio.com/license.html
-pyaudio - python wrapper for portAudio
+* pyaudio - python wrapper for portAudio
 http://people.csail.mit.edu/hubert/pyaudio/
-Class ToneGenerator
+* Class ToneGenerator
 https://markhedleyjones.com/projects/python-tone-generator
