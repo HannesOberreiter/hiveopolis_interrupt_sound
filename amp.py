@@ -98,7 +98,7 @@ frequency_array = list([50, 500, 5000])
 # Amplitude of the waveform
 
 
-amplitude_array = list([0, 0.25, 0.5, 0.75, 1])
+amplitude_array = list([0, 0.0625, 0.125, 0.25, 0.5, 0.75, 1])
 
 total_array = []
 for n in range(0, len(frequency_array)):
