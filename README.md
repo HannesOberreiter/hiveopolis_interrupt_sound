@@ -10,12 +10,12 @@ http://people.csail.mit.edu/hubert/pyaudio/
 ### sinus.py  ###
 Plays random order of defined frequencies with given ampltiude (0.5)
 
-`pyhton sinus.py`
+`python sinus.py`
 
 ### amp.py  ###
 Plays random order of ampltiudes and frequencies
 
-`pyhton sinus.py`
+`python sinus.py`
 
 ### references and citation ###
 * portAudio
