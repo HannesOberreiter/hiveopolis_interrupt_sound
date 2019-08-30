@@ -2,7 +2,7 @@
 
 ### Libraries ###
 
-numpy, pyaudio, math, time, random, os
+`numpy, pyaudio, math, time, random, os`
 
 pyaudio --- reference and installation guide:
 http://people.csail.mit.edu/hubert/pyaudio/
