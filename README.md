@@ -2,12 +2,7 @@
 
 ### Libraries ###
 
-import numpy
-import pyaudio
-import math
-import time
-import random
-import os
+numpy, pyaudio, math, time, random, os
 
 pyaudio --- reference and installation guide:
 http://people.csail.mit.edu/hubert/pyaudio/
