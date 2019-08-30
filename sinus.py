@@ -109,7 +109,7 @@ frequency_array.extend([440])
 # frequency_array.extend([587.33])
 
 # Amplitude of the waveform
-amplitude = 1
+amplitude = 0.5
 # Number of runs
 runs = 4
 # clear
