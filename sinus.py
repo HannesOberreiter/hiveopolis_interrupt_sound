@@ -79,7 +79,7 @@ class ToneGenerator(object):
 # init our class object
 generator = ToneGenerator()
 # define start and endpoint of frequencies, with step in range
-frequency_start = 100
+frequency_start = 50
 frequency_end = 800
 steps = 50
 # Time (seconds) to play at each step
@@ -106,13 +106,18 @@ def white_noise(timeout):
 # Kammerton A
 frequency_array.extend([440])
 # D5
-frequency_array.extend([587.33])
+# frequency_array.extend([587.33])
 
 # Amplitude of the waveform
 amplitude = 0.50
 # Number of runs
 runs = 4
 # clear
+clear()
+
+print('######  Hiveopolis ######')
+print('Starting in 4 minutes ...')
+time.sleep(240)
 clear()
 
 for i in range(1, runs + 1):
@@ -130,17 +135,17 @@ for i in range(1, runs + 1):
         print("Run: " + str(i) + " - Loop: " + str(x+1) + " / " +  str(len(frequency_array)))
         # special case white noise
         if(frequency_array[x] == 0):
-            print("Playing white noise")
+            print("Vibration on: white noise")
             white_noise(step_duration)
         else:
             # custom prints for special cases
             if(frequency_array[x] == 440):
-                print("Playing concert pitch A")
-            elif(frequency_array[x] == 587.33):
-                print("Playing chord D5")
+                print("Vibration on: concert pitch A")
+            #elif(frequency_array[x] == 587.33):
+                #print("Vibration on: chord D5")
             else:
                 # standard print of current frequency
-                print("Playing tone at {0:0.2f} Hz".format(frequency_array[x]))
+                print("Vibration on: {0:0.2f} Hz".format(frequency_array[x]))
 
             # use our generator class to generate the sound
             generator.play(frequency_array[x], step_duration, amplitude)
@@ -148,6 +153,12 @@ for i in range(1, runs + 1):
                 # record the sound?
                 pass
 
-        print("Sleep 10 seconds")
+        print("Vibration off: 10 seconds")
         time.sleep(10)
         clear()
+
+
+print('######  Hiveopolis ######')
+print('######   Finished  ######')
+time.sleep(240)
+clear()
