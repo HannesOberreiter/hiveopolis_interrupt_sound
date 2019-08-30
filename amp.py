@@ -116,8 +116,8 @@ clear()
 
 print('######  Hiveopolis ######')
 print('Starting in 4 minutes ...')
-#time.sleep(240)
-time.sleep(5)
+time.sleep(240)
+#time.sleep(5)
 clear()
 
 for i in range(1, runs + 1):
