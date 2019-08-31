@@ -3,7 +3,8 @@
 # for dance interrupt experiment
 #############################
 
-#modified for different frequencies
+# Amplitude change testing
+#modified for lower amplitudes
 
 import numpy
 ### pyaudio --- see link for installation guide
@@ -81,38 +82,34 @@ class ToneGenerator(object):
 # init our class object
 generator = ToneGenerator()
 # define start and endpoint of frequencies, with step in range
-frequency_start = 750
-frequency_end = 1000
-steps = 50
+#frequency_start = 50
+#frequency_end = 800
+#steps = 50
 # Time (seconds) to play at each step
 step_duration = 5
-# create list array of frequencies
-frequency_array = list(range(frequency_start, frequency_end, steps))
 
-# add special cases to array
-frequency_array.extend([3000])
-frequency_array.extend([4000])
-frequency_array.extend([5000])
-frequency_array.extend([10000])
-frequency_array.extend([15000])
-# white noise
-#frequency_array.extend([0])
-def white_noise(timeout):
-    # custom stream for white noise
-    stream = pyaudio.PyAudio().open(format = pyaudio.paInt8,channels = 1,rate = 22050,output = True)
-    # loop with timer to generate step time duration
-    stop = time.time() + timeout
-    while time.time() < stop:
-        # write stream for white noise
-        stream.write(chr(int(random.random()*256)))
+# create list array of frequencies
+frequency_array = list([50, 500, 5000])
 
 # Kammerton A
-#frequency_array.extend([440])
+# frequency_array.extend([440])
 # D5
 # frequency_array.extend([587.33])
 
 # Amplitude of the waveform
-amplitude = 0.5
+
+
+amplitude_array = list([0.03125, 0.015625, 0.0078125, 0.00390625])
+
+total_array = []
+for n in range(0, len(frequency_array)):
+    for x in range(0, len(amplitude_array)):
+        total_array.append([frequency_array[n], amplitude_array[x]])
+
+# array_list [n][0] === Frequency
+# array_list [n][1] === Amplitude
+
+
 # Number of runs
 runs = 8
 # clear
@@ -121,6 +118,7 @@ clear()
 print('######  Hiveopolis ######')
 print('Starting in 4 minutes ...')
 time.sleep(240)
+#time.sleep(5)
 clear()
 
 for i in range(1, runs + 1):
@@ -130,31 +128,19 @@ for i in range(1, runs + 1):
     print('Starting in 5 seconds ...')
     time.sleep(5)
     clear()
-    # shuffle our frequencies in array
-    random.shuffle(frequency_array)
+    # shuffle our total array of frequencies and amplitudes
+    random.shuffle(total_array)
 
-    for x in range(0, len(frequency_array)):
+    for x in range(0, len(total_array)):
         # print current loop number
-        print("Run: " + str(i) + " - Loop: " + str(x+1) + " / " +  str(len(frequency_array)))
-        # special case white noise
-        if(frequency_array[x] == 0):
-            print("Vibration on: white noise")
-            white_noise(step_duration)
-        else:
-            # custom prints for special cases
-            if(frequency_array[x] == 440):
-                print("Vibration on: concert pitch A")
-            #elif(frequency_array[x] == 587.33):
-                #print("Vibration on: chord D5")
-            else:
-                # standard print of current frequency
-                print("Vibration on: {0:0.2f} Hz".format(frequency_array[x]))
+        print("Run: " + str(i) + " - Loop: " + str(x+1) + " / " +  str(len(total_array)))
 
-            # use our generator class to generate the sound
-            generator.play(frequency_array[x], step_duration, amplitude)
-            while generator.is_playing():
-                # record the sound?
-                pass
+        print("Vibration on: {0:0.2f} Hz".format(total_array[x][0]) + " and {0:0.2f} amplitude".format(total_array[x][1]))
+
+        generator.play(total_array[x][0], step_duration, total_array[x][1])
+        while generator.is_playing():
+            # record the sound?
+            pass
 
         print("Vibration off: 10 seconds")
         time.sleep(10)
