@@ -64,7 +64,7 @@ class ToneGenerator(object):
                 self.stream.stop_stream()
                 self.stream.close()
                 self.streamOpen = False
-                print("End {}".format(time.time() - self.startTime))
+                print("End {}".format(time.time() - self.benchmark))
             return False
 
     def please_stop(self):
@@ -75,18 +75,23 @@ class ToneGenerator(object):
         return False
 
     def interrupt(self):
-        if self.stream.is_active():
-            self.stream.stop_stream()
-            time.sleep(0.1)
-            self.stream.start_stream()
-            return True
-        else:
+        if(time.time() - self.startTime >= 0.9):
             if self.streamOpen:
                 self.stream.stop_stream()
-                self.stream.close()
-                self.streamOpen = False
-                print("End {}".format(time.time() - self.startTime))
-            return False
+                #print("pause")
+                time.sleep(0.1)
+                self.stream.start_stream()
+                self.startTime = time.time()
+                return True
+            else:
+                if self.streamOpen:
+                    self.stream.stop_stream()
+                    self.stream.close()
+                    self.streamOpen = False
+                    print("End {}".format(time.time() - self.benchmark))
+                return False
+        else:
+            return True
 
     def play(self, frequency, duration, amplitude):
         self.omega = float(frequency) * (math.pi * 2) / self.samplerate
@@ -100,13 +105,14 @@ class ToneGenerator(object):
                                   output=True,
                                   frames_per_buffer=self.frames_per_buffer,
                                   stream_callback=self.callback)
+        self.benchmark = time.time()
         self.startTime = time.time()
 
 # init our class object
 generator = ToneGenerator()
 
 # Time (seconds) to play at each step
-step_duration = 10
+step_duration = 5
 
 # create list array of frequencies
 frequency_array = list([500])
@@ -115,7 +121,7 @@ frequency_array = list([500])
 amplitude_array = list([0.5])
 
 # Time of the waveform
-pulse_array = list([False, True])
+pulse_array = list([True, True])
 
 total_array = []
 for n in range(0, len(frequency_array)):
@@ -135,7 +141,7 @@ clear()
 print('######  Hiveopolis ######')
 print('Starting in 4 minutes ...')
 #time.sleep(240)
-time.sleep(5)
+#time.sleep(5)
 clear()
 
 for i in range(1, runs + 1):
@@ -159,19 +165,9 @@ for i in range(1, runs + 1):
         if(total_array[x][2]):
             generator.play(total_array[x][0], (step_duration - (step_duration/0.9*0.1)), total_array[x][1])
             while generator.is_playing():
-                time.sleep(0.9)
                 if generator.interrupt() == False:
                     break
-                # record the sound?
                 pass
-            '''
-            for n in range(step_duration):
-                generator.play(total_array[x][0], 0.9, total_array[x][1])
-                start = time.time()
-                time.sleep(1)
-                generator.please_stop()
-                print(time.time() - start)
-            '''
         else:
             generator.play(total_array[x][0], step_duration, total_array[x][1])
             while generator.is_playing():
