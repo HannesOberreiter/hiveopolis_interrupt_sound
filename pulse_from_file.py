@@ -13,7 +13,7 @@ import random
 import os
 import wave 
 
-runs = 3
+runs = 6
 # define our clear function
 # https://www.geeksforgeeks.org/clear-screen-python/
 def clear():
@@ -31,7 +31,7 @@ clear()
 chunk = 1024  
 
 
-file_array = ["16bit500hz1min1amp_pulse09seksil01sec.wav", "16bit500hz1min1amp.wav", "16bit5000hz1min1amp.wav","16bit5000hz1min1amp_pulse09seksil01sec.wav"]
+file_array = ["16bit5000hz30sek1amp.wav","16bit5000hz30sek1amp_pulse09seksil01sec.wav", "16bit5000hz30sek00625amp_pulse09seksil01sec.wav", "16bit5000hz30sec00625amp.wav" ]
 print('######  Hiveopolis ######')
 print('Starting in 4 minutes ...')
 time.sleep(240)
@@ -51,15 +51,15 @@ for i in range(1, runs + 1):
     
     for j in file_array:
         f = wave.open(r"sound_files/{}".format(j),"rb")
-        if j == "16bit5000hz1min1amp_pulse09seksil01sec.wav":
-            a = "(FRQ = 5000hz, AMP = 1, PULSE = 0.9:0.1sec)"
-        if j == "16bit500hz1min1amp_pulse09seksil01sec.wav":
+        if j == "16bit5000hz30sek1amp.wav":
+            a = "(FRQ = 5000hz, AMP = 1)"
+        if j == "16bit5000hz30sek1amp_pulse09seksil01sec.wav":
             a = "(FRQ = 500hz, AMP = 1, PULSE = 0.9:0.1sec)"
-        if j == "16bit500hz1min1amp.wav":
-            a = "(FRQ = 500hz, AMP = 1, no PULSE)"
-        if j == "16bit5000hz1min1amp.wav":
-            a = "(FRQ = 5000hz, AMP = 1, no PULSE)"
-        print("Playing {} for 1 minute".format(a))
+        if j == "16bit5000hz30sec00625amp.wav":
+            a = "(FRQ = 5000hz, AMP = 0.0625)"
+        if j == "16bit5000hz30sek00625amp_pulse09seksil01sec.wav":
+            a = "(FRQ = 500hz, AMP = 0.0625, PULSE = 0.9:0.1sec)"
+        print("Playing {} for 30 seconds".format(a))
  
         #open stream  
         stream = p.open(format = p.get_format_from_width(f.getsampwidth()),  
@@ -80,8 +80,8 @@ for i in range(1, runs + 1):
         clear()
 
         
-        print("Vibration off: 1 minute")
-        time.sleep(60)
+        print("Vibration off: 30 seconds")
+        time.sleep(30)
         clear()
 
 p.terminate() 
