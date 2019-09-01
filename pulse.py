@@ -121,7 +121,7 @@ frequency_array = list([500])
 amplitude_array = list([0.5])
 
 # Time of the waveform
-pulse_array = list([True, True])
+pulse_array = list([True, False])
 
 total_array = []
 for n in range(0, len(frequency_array)):
