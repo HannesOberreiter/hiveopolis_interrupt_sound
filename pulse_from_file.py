@@ -36,7 +36,7 @@ file_array = ["16bit500hz1min1amp.wav","16bit500hz1min1amp_pulse09seksil01sec.wa
 
 print('######  Hiveopolis ######')
 print('Starting in 4 minutes ...')
-#time.sleep(240)
+time.sleep(240)
 clear()
 #instantiate PyAudio
 p = pyaudio.PyAudio()
@@ -62,7 +62,6 @@ for i in range(1, runs + 1):
         #     a = "(FRQ = 5,000hz, AMP = 0.0625)"
         # if j == "16bit5000hz30sek00625amp_pulse09seksil01sec.wav":
         #     a = "(FRQ = 5,000hz, AMP = 0.0625, PULSE = 0.9:0.1sec)"
-
 
         if j == "16bit500hz1min1amp.wav":
             a = "(FRQ = 500hz, AMP = 1, 60s)"
