@@ -81,20 +81,20 @@ class ToneGenerator(object):
 # init our class object
 generator = ToneGenerator()
 # define start and endpoint of frequencies, with step in range
-frequency_start = 750
-frequency_end = 1000
-steps = 50
+frequency_start = 5500
+frequency_end = 10000
+steps = 500
 # Time (seconds) to play at each step
 step_duration = 5
 # create list array of frequencies
 frequency_array = list(range(frequency_start, frequency_end, steps))
 
 # add special cases to array
-frequency_array.extend([3000])
-frequency_array.extend([4000])
-frequency_array.extend([5000])
-frequency_array.extend([10000])
-frequency_array.extend([15000])
+#frequency_array.extend([3000])
+#frequency_array.extend([4000])
+#frequency_array.extend([5000])
+#frequency_array.extend([10000])
+#frequency_array.extend([15000])
 # white noise
 #frequency_array.extend([0])
 def white_noise(timeout):
