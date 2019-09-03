@@ -1,6 +1,7 @@
 #############################
 # Hiveopolis - take audio files and play them in a certain order
-# for dance interrupt experiment - enviroment
+# for dance interrupt experiment - environment
+# takes soundfiles from folder "environment"
 #############################
 
 import numpy
@@ -35,7 +36,7 @@ file_array = sorted(glob.iglob('environment/*.wav'))
 
 print('######  Hiveopolis ######')
 print('Starting in 4 minutes ...')
-#time.sleep(240)
+time.sleep(240)
 clear()
 #instantiate PyAudio
 p = pyaudio.PyAudio()
