@@ -81,9 +81,9 @@ class ToneGenerator(object):
 # init our class object
 generator = ToneGenerator()
 # define start and endpoint of frequencies, with step in range
-frequency_start = 3500
-frequency_end = 5000
-steps = 500
+frequency_start = 6100
+frequency_end = 7500
+steps = 100
 # Time (seconds) to play at each step
 step_duration = 5
 # create list array of frequencies
@@ -114,7 +114,7 @@ def white_noise(timeout):
 # Amplitude of the waveform
 amplitude = 0.5
 # Number of runs
-runs = 16
+runs = 6
 # clear
 clear()
 
